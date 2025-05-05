@@ -32,132 +32,181 @@ class _MoreAboutMeScreenState extends State<MoreAboutMeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF6A1B9A), // Purple background
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () => Navigator.pop(context),
-        ),
-        title: Text('Create Profile', style: TextStyle(color: Colors.black)),
-        centerTitle: true,
-        elevation: 0,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 16.0, top: 16),
+      backgroundColor: Color(0xFF6A1B9A),
+      body: Column(
+        children: [
+          SizedBox(height: 40),
+          Expanded(
             child: Container(
-              width: 40,
-              height: 40,
+              padding: EdgeInsets.all(20),
               decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(color: Colors.black),
+                color: Colors.white,
+                borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
               ),
-              child: Center(
-                child: Text(
-                  '1/3',
-                  style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Header avec Create Profile et cercle 1/3
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            InkWell(
+                              onTap: () => Navigator.pop(context),
+                              borderRadius: BorderRadius.circular(12),
+                              child: Container(
+                                padding: EdgeInsets.all(6),
+                                decoration: BoxDecoration(
+                                  color: Color(0xFF6A1B9A),
+                                  shape: BoxShape.circle,
+                                ),
+                                child: Icon(Icons.arrow_back, color: Colors.white),
+                              ),
+                            ),
+                            SizedBox(width: 12),
+                            Text(
+                              "Create Profile",
+                              style: TextStyle(
+                                color: Color(0xFF6A1B9A),
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                        Container(
+                          padding: EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Color(0xFF6A1B9A).withOpacity(0.1),
+                          ),
+                          child: Text(
+                            '1/3',
+                            style: TextStyle(
+                              color: Color(0xFF6A1B9A),
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 32),
+
+                    Text("What music genres do you love?",
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.bold)),
+                    SizedBox(height: 12),
+                    Wrap(
+                      spacing: 8,
+                      children: genres.map((genre) {
+                        final isSelected = selectedGenres.contains(genre);
+                        return FilterChip(
+                          label: Text(genre),
+                          selected: isSelected,
+                          selectedColor: Color(0xFF6A1B9A).withOpacity(0.2),
+                          checkmarkColor: Color(0xFF6A1B9A),
+                          onSelected: (selected) {
+                            setState(() {
+                              isSelected
+                                  ? selectedGenres.remove(genre)
+                                  : selectedGenres.add(genre);
+                            });
+                          },
+                        );
+                      }).toList(),
+                    ),
+
+                    SizedBox(height: 32),
+                    Divider(),
+
+                    SizedBox(height: 16),
+                    Text("Your all-time favorite artists?",
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.bold)),
+                    SizedBox(height: 12),
+                    TextField(
+                      controller: artistController,
+                      onSubmitted: addArtist,
+                      decoration: InputDecoration(
+                        hintText: "Type an artist and press Enter",
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        contentPadding: EdgeInsets.symmetric(horizontal: 12),
+                      ),
+                    ),
+                    SizedBox(height: 8),
+                    Wrap(
+                      spacing: 8,
+                      children: favoriteArtists.map((artist) {
+                        return Chip(
+                          label: Text(artist),
+                          onDeleted: () {
+                            setState(() {
+                              favoriteArtists.remove(artist);
+                            });
+                          },
+                        );
+                      }).toList(),
+                    ),
+
+                    SizedBox(height: 32),
+                    Divider(),
+
+                    SizedBox(height: 16),
+                    Text("What's your go-to music mood?",
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.bold)),
+                    SizedBox(height: 12),
+                    Wrap(
+                      spacing: 8,
+                      children: moods.map((mood) {
+                        return ChoiceChip(
+                          label: Text(mood),
+                          selected: selectedMood == mood,
+                          selectedColor: Color(0xFF6A1B9A).withOpacity(0.2),
+                          onSelected: (_) {
+                            setState(() {
+                              selectedMood = mood;
+                            });
+                          },
+                        );
+                      }).toList(),
+                    ),
+
+                    SizedBox(height: 40),
+                    Center(
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Placeholder(),
+                            ),
+                          );
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Color(0xFF6A1B9A),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 32, vertical: 14),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                          elevation: 4,
+                        ),
+                        child:
+                            Text('Continue', style: TextStyle(fontSize: 16)),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
           ),
         ],
       ),
-      body: Container(
-        padding: EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
-        ),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text("What music genres do you love?",
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-              Wrap(
-                spacing: 8,
-                children: genres.map((genre) {
-                  final isSelected = selectedGenres.contains(genre);
-                  return FilterChip(
-                    label: Text(genre),
-                    selected: isSelected,
-                    onSelected: (selected) {
-                      setState(() {
-                        isSelected ? selectedGenres.remove(genre) : selectedGenres.add(genre);
-                      });
-                    },
-                  );
-                }).toList(),
-              ),
-              SizedBox(height: 24),
-              Text("Your all-time favorite artists?",
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-              TextField(
-                controller: artistController,
-                onSubmitted: addArtist,
-                decoration: InputDecoration(
-                  hintText: "Type an artist and press Enter",
-                ),
-              ),
-              Wrap(
-                spacing: 8,
-                children: favoriteArtists.map((artist) {
-                  return Chip(
-                    label: Text(artist),
-                    onDeleted: () {
-                      setState(() {
-                        favoriteArtists.remove(artist);
-                      });
-                    },
-                  );
-                }).toList(),
-              ),
-              SizedBox(height: 24),
-              Text("What's your go-to music mood?",
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-              Wrap(
-                spacing: 8,
-                children: moods.map((mood) {
-                  return ChoiceChip(
-                    label: Text(mood),
-                    selected: selectedMood == mood,
-                    onSelected: (_) {
-                      setState(() {
-                        selectedMood = mood;
-                      });
-                    },
-                  );
-                }).toList(),
-              ),
-              SizedBox(height: 32),
-              Align(
-                alignment: Alignment.centerRight,
-                child: ElevatedButton(
-                  onPressed: () {
-                    // Replace with your next screen
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => Placeholder(), // Replace with ProfileStep2()
-                      ),
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xFF6A1B9A),
-                    padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
-                  child: Text('Continue'),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
     );
   }
 }
-
-

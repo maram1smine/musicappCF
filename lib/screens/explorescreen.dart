@@ -1,11 +1,12 @@
 // profile_suggestions_screen.dart
 import 'package:flutter/material.dart';
-import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
+import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:musicapp1/widgets/buttom_nav_bar.dart';
 
 class ProfileSuggestionsScreen extends StatefulWidget {
   @override
-  _ProfileSuggestionsScreenState createState() => _ProfileSuggestionsScreenState();
+  _ProfileSuggestionsScreenState createState() =>
+      _ProfileSuggestionsScreenState();
 }
 
 class _ProfileSuggestionsScreenState extends State<ProfileSuggestionsScreen> {
@@ -16,7 +17,7 @@ class _ProfileSuggestionsScreenState extends State<ProfileSuggestionsScreen> {
       'location': 'New York',
       'distance': '10 KMS AWAY',
       'avatar': 'images/profil2.png',
-      'background': 'images/1.png',
+
     },
     {
       'name': 'Noah Vibes',
@@ -24,137 +25,191 @@ class _ProfileSuggestionsScreenState extends State<ProfileSuggestionsScreen> {
       'location': 'Los Angeles',
       'distance': '15 KMS AWAY',
       'avatar': 'images/profil1.png',
-      'background': 'images/1.png',
+
     },
   ];
 
   int currentIndex = 0;
+  bool isLiked = false;
+  bool isDisliked = false;
 
-  void _onLike() {
-    print("Liked ${suggestions[currentIndex]['name']}");
-    _swipeNext();
-  }
-
-  void _onDislike() {
-    print("Disliked ${suggestions[currentIndex]['name']}");
-    _swipeNext();
-  }
-
-  void _swipeNext() {
+  void triggerFeedback(bool liked) {
     setState(() {
-      if (currentIndex < suggestions.length - 1) {
-        currentIndex++;
+      if (liked) {
+        isLiked = true;
       } else {
-        currentIndex = 0; // Loop back to start
+        isDisliked = true;
       }
     });
+
+    Future.delayed(Duration(milliseconds: 500), () {
+      setState(() {
+        isLiked = false;
+        isDisliked = false;
+      });
+    });
+  }
+
+  List<Widget> buildCards() {
+    return suggestions.map((suggestion) {
+      return Container(
+        margin: EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          image: DecorationImage(
+            image: AssetImage(suggestion['avatar']!),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: Stack(
+          children: [
+            Positioned(
+              bottom: 20,
+              left: 20,
+              right: 20,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "${suggestion['name']}, ${suggestion['age']}",
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                  SizedBox(height: 4),
+                  Row(
+                    children: [
+                      Icon(Icons.location_on, color: Colors.white70, size: 16),
+                      SizedBox(width: 4),
+                      Text(
+                        "${suggestion['location']} - ${suggestion['distance']}",
+                        style: TextStyle(color: Colors.white70),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 4),
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    decoration: BoxDecoration(
+                      color: Colors.green,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Text(
+                      'Active Now',
+                      style: TextStyle(color: Colors.white, fontSize: 12),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      );
+    }).toList();
   }
 
   @override
   Widget build(BuildContext context) {
+    final cards = buildCards();
+
     return Scaffold(
       appBar: AppBar(
-        title: Text("Find your partner"),
+        backgroundColor: Color(0xFF1A002D), // Violet foncé
+        title: Text('Find your partner',style: TextStyle(color: Colors.white),),
+        leading: BackButton(color: Colors.white),
       ),
+
       body: Stack(
         children: [
           Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(
+                colors: [Colors.purple, Colors.black],
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
-                colors: [Colors.purple, Colors.black],
               ),
             ),
           ),
-          Swiper(
-            itemCount: suggestions.length,
-            index: currentIndex,
-            onIndexChanged: (index) {
-              setState(() {
-                currentIndex = index;
-              });
-            },
-            itemBuilder: (context, index) {
-              final suggestion = suggestions[index];
-              return Card(
-                elevation: 8,
-                margin: EdgeInsets.all(16),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-                child: Stack(
+          Column(
+            children: [
+              Expanded(
+                child: CardSwiper(
+                  cards: cards,
+                  numberOfCardsDisplayed: 1,
+                  isLoop: true,
+                  onSwipe: (index, direction) {
+                    setState(() {
+                      currentIndex = index;
+                    });
+
+                    if (direction == CardSwiperDirection.right) {
+                      print("Liked ${suggestions[index]['name']}");
+                      triggerFeedback(true);
+                    } else if (direction == CardSwiperDirection.left) {
+                      print("Disliked ${suggestions[index]['name']}");
+                      triggerFeedback(false);
+                    }
+                  },
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 80),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(16),
-                      child: Image.asset(
-                        suggestion['avatar']!,
-                        fit: BoxFit.cover,
-                        height: double.infinity,
-                        width: double.infinity,
+                    AnimatedContainer(
+                      duration: Duration(milliseconds: 300),
+                      curve: Curves.easeInOut,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: isDisliked ? Colors.redAccent : Colors.red,
+                        boxShadow: isDisliked
+                            ? [
+                                BoxShadow(
+                                  color: Colors.redAccent.withOpacity(0.6),
+                                  blurRadius: 20,
+                                  spreadRadius: 2,
+                                )
+                              ]
+                            : [],
+                      ),
+                      child: IconButton(
+                        icon: Icon(Icons.thumb_down, color: Colors.white),
+                        onPressed: () {
+                          triggerFeedback(false);
+                        },
                       ),
                     ),
-                    Positioned(
-                      bottom: 16,
-                      left: 16,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            '${suggestion['name']}, ${suggestion['age']}',
-                            style: TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                          ),
-                          Row(
-                            children: [
-                              Icon(Icons.location_on, color: Colors.white70, size: 16),
-                              SizedBox(width: 4),
-                              Text(
-                                '${suggestion['location']} - ${suggestion['distance']}',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  color: Colors.white70,
-                                ),
-                              ),
-                            ],
-                          ),
-                          Text(
-                            'Active Now',
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: Colors.green,
-                            ),
-                          ),
-                        ],
+                    SizedBox(width: 32),
+                    AnimatedContainer(
+                      duration: Duration(milliseconds: 300),
+                      curve: Curves.easeInOut,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: isLiked ? Colors.greenAccent : Colors.green,
+                        boxShadow: isLiked
+                            ? [
+                                BoxShadow(
+                                  color: Colors.greenAccent.withOpacity(0.6),
+                                  blurRadius: 20,
+                                  spreadRadius: 2,
+                                )
+                              ]
+                            : [],
+                      ),
+                      child: IconButton(
+                        icon: Icon(Icons.thumb_up, color: Colors.white),
+                        onPressed: () {
+                          triggerFeedback(true);
+                        },
                       ),
                     ),
                   ],
                 ),
-              );
-            },
-            loop: true,
-          ),
-          Positioned(
-            bottom: 80,
-            left: 0,
-            right: 0,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                FloatingActionButton(
-                  backgroundColor: Colors.red,
-                  onPressed: _onDislike,
-                  child: Icon(Icons.thumb_down, color: Colors.white),
-                ),
-                SizedBox(width: 32),
-                FloatingActionButton(
-                  backgroundColor: Colors.green,
-                  onPressed: _onLike,
-                  child: Icon(Icons.thumb_up, color: Colors.white),
-                ),
-              ],
-            ),
+              )
+            ],
           ),
         ],
       ),

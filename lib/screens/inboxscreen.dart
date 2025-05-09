@@ -3,8 +3,10 @@ import 'chatscreen.dart';
 import 'package:musicapp1/widgets/buttom_nav_bar.dart'; // Custom BottomNavBar
 
 class MusicMatchInbox extends StatefulWidget {
+  const MusicMatchInbox({super.key});
+
   @override
-  _MusicMatchInboxState createState() => _MusicMatchInboxState();
+  State<MusicMatchInbox> createState() => _MusicMatchInboxState();
 }
 
 class _MusicMatchInboxState extends State<MusicMatchInbox> {
@@ -67,7 +69,9 @@ class _MusicMatchInboxState extends State<MusicMatchInbox> {
         itemBuilder: (context, index) {
           final msg = messages[index];
           return ListTile(
-            tileColor: msg['unread'] > 0 ? Colors.deepPurple.shade900.withOpacity(0.3) : null,
+            tileColor: msg['unread'] > 0
+                ? Colors.deepPurple.shade900.withValues(alpha: 0.3)
+                : null,
             leading: CircleAvatar(
               backgroundImage: AssetImage(msg['avatar']),
               radius: 24,
@@ -90,11 +94,14 @@ class _MusicMatchInboxState extends State<MusicMatchInbox> {
             trailing: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(msg['time'], style: const TextStyle(fontSize: 12, color: Colors.white70)),
+                Text(msg['time'],
+                    style:
+                        const TextStyle(fontSize: 12, color: Colors.white70)),
                 if (msg['unread'] > 0)
                   Container(
                     margin: const EdgeInsets.only(top: 4),
-                    padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                     decoration: BoxDecoration(
                       color: const Color.fromARGB(255, 117, 17, 170),
                       borderRadius: BorderRadius.circular(12),
@@ -124,4 +131,3 @@ class _MusicMatchInboxState extends State<MusicMatchInbox> {
     );
   }
 }
-

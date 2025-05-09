@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 class ChatScreen extends StatelessWidget {
   final String matchedUserName;
   final String matchedUserImage;
- 
-
 
 //////////
-  ChatScreen({required this.matchedUserName, required this.matchedUserImage});
+  const ChatScreen(
+      {super.key,
+      required this.matchedUserName,
+      required this.matchedUserImage});
 
   @override
   Widget build(BuildContext context) {
@@ -49,8 +50,9 @@ class ChatScreen extends StatelessWidget {
               children: [
                 Expanded(
                   child: Text(
-                    'Enable push notifications to see when ${matchedUserName} replies.',
-                    style: TextStyle(color: const Color.fromARGB(255, 117, 17, 170)),
+                    'Enable push notifications to see when $matchedUserName replies.',
+                    style: TextStyle(
+                        color: const Color.fromARGB(255, 117, 17, 170)),
                   ),
                 ),
                 TextButton(
@@ -65,9 +67,12 @@ class ChatScreen extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('You matched with $matchedUserName', style: TextStyle(fontSize: 18)),
+                  Text('You matched with $matchedUserName',
+                      style: TextStyle(fontSize: 18)),
                   SizedBox(height: 5),
-                  Text('14 hours ago', style: TextStyle(color: const Color.fromARGB(255, 117, 17, 170))),
+                  Text('14 hours ago',
+                      style: TextStyle(
+                          color: const Color.fromARGB(255, 117, 17, 170))),
                   SizedBox(height: 20),
                   CircleAvatar(
                     radius: 60,
@@ -81,13 +86,15 @@ class ChatScreen extends StatelessWidget {
                   ElevatedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
-                      backgroundColor:const Color.fromARGB(255, 117, 17, 170),
+                      backgroundColor: const Color.fromARGB(255, 117, 17, 170),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30),
                       ),
                     ),
-                    child: Text('Get Listening Stats',
-  style: TextStyle(color: Colors.white),),
+                    child: Text(
+                      'Get Listening Stats',
+                      style: TextStyle(color: Colors.white),
+                    ),
                   )
                 ],
               ),
@@ -112,7 +119,8 @@ class ChatScreen extends StatelessWidget {
                   ),
                 ),
                 IconButton(
-                  icon: Icon(Icons.send, color: const Color.fromARGB(255, 117, 17, 170)),
+                  icon: Icon(Icons.send,
+                      color: const Color.fromARGB(255, 117, 17, 170)),
                   onPressed: () {},
                 ),
               ],

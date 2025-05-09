@@ -5,10 +5,10 @@ import 'create_account_screen.dart';
 import 'inboxscreen.dart';
 
 class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
+
   @override
-  State<StatefulWidget> createState() {
-    return _LoginScreenState();
-  }
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
@@ -60,7 +60,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Widget pageTitle() {
-    return Container(
+    return SizedBox(
       height: _deviceHeight * 0.10,
       child: Text(
         'WELCOME BACK',
@@ -74,7 +74,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Widget _loginForm() {
-    return Container(
+    return SizedBox(
         height: _deviceHeight * 0.18,
         child: Form(
             key: _loginFormKey,
@@ -84,13 +84,13 @@ class _LoginScreenState extends State<LoginScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 CustomTextFormFields(
-                    onSaved: (_value) {},
+                    onSaved: (value) {},
                     regEx:
                         r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+",
                     hintText: "email",
                     obscureText: false),
                 CustomTextFormFields(
-                    onSaved: (_value) {},
+                    onSaved: (value) {},
                     regEx: r",{8,}",
                     hintText: "Password",
                     obscureText: true),
@@ -107,8 +107,7 @@ class _LoginScreenState extends State<LoginScreen> {
           Navigator.push(
             context,
             MaterialPageRoute(
-builder: (context) => MusicMatchInbox(),
-
+              builder: (context) => MusicMatchInbox(),
             ),
           );
         });
@@ -122,12 +121,10 @@ builder: (context) => MusicMatchInbox(),
           MaterialPageRoute(builder: (context) => CreateAccountScreen()),
         );
       },
-      child: Container(
-        child: Text(
-          'Don\'t have an account?',
-          style: TextStyle(
-            color: const Color.fromARGB(255, 232, 234, 238),
-          ),
+      child: Text(
+        'Don\'t have an account?',
+        style: TextStyle(
+          color: const Color.fromARGB(255, 232, 234, 238),
         ),
       ),
     );

@@ -1,15 +1,27 @@
 import 'package:flutter/material.dart';
 
 class MoreAboutMeScreen extends StatefulWidget {
+  const MoreAboutMeScreen({super.key});
+
   @override
-  _MoreAboutMeScreenState createState() => _MoreAboutMeScreenState();
+  State<MoreAboutMeScreen> createState() => _MoreAboutMeScreenState();
 }
 
 class _MoreAboutMeScreenState extends State<MoreAboutMeScreen> {
   List<String> selectedGenres = [];
   List<String> genres = [
-    'Pop', 'Rock', 'Hip Hop', 'Jazz', 'Classical', 'EDM',
-    'R&B', 'Country', 'Indie', 'K-pop', 'Afrobeat', 'Reggaeton'
+    'Pop',
+    'Rock',
+    'Hip Hop',
+    'Jazz',
+    'Classical',
+    'EDM',
+    'R&B',
+    'Country',
+    'Indie',
+    'K-pop',
+    'Afrobeat',
+    'Reggaeton'
   ];
 
   List<String> favoriteArtists = [];
@@ -17,7 +29,12 @@ class _MoreAboutMeScreenState extends State<MoreAboutMeScreen> {
 
   String? selectedMood;
   List<String> moods = [
-    'Sad songs', 'Party vibes', 'Chill & Lo-fi', 'Motivational', 'Romantic', 'Oldies'
+    'Sad songs',
+    'Party vibes',
+    'Chill & Lo-fi',
+    'Motivational',
+    'Romantic',
+    'Oldies'
   ];
 
   void addArtist(String artist) {
@@ -62,7 +79,8 @@ class _MoreAboutMeScreenState extends State<MoreAboutMeScreen> {
                                   color: Color(0xFF6A1B9A),
                                   shape: BoxShape.circle,
                                 ),
-                                child: Icon(Icons.arrow_back, color: Colors.white),
+                                child:
+                                    Icon(Icons.arrow_back, color: Colors.white),
                               ),
                             ),
                             SizedBox(width: 12),
@@ -80,7 +98,7 @@ class _MoreAboutMeScreenState extends State<MoreAboutMeScreen> {
                           padding: EdgeInsets.all(10),
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
-                            color: Color(0xFF6A1B9A).withOpacity(0.1),
+                            color: Color(0xFF6A1B9A).withValues(alpha: 0.1),
                           ),
                           child: Text(
                             '1/3',
@@ -105,7 +123,8 @@ class _MoreAboutMeScreenState extends State<MoreAboutMeScreen> {
                         return FilterChip(
                           label: Text(genre),
                           selected: isSelected,
-                          selectedColor: Color(0xFF6A1B9A).withOpacity(0.2),
+                          selectedColor:
+                              Color(0xFF6A1B9A).withValues(alpha: 0.2),
                           checkmarkColor: Color(0xFF6A1B9A),
                           onSelected: (selected) {
                             setState(() {
@@ -166,7 +185,8 @@ class _MoreAboutMeScreenState extends State<MoreAboutMeScreen> {
                         return ChoiceChip(
                           label: Text(mood),
                           selected: selectedMood == mood,
-                          selectedColor: Color(0xFF6A1B9A).withOpacity(0.2),
+                          selectedColor:
+                              Color(0xFF6A1B9A).withValues(alpha: 0.2),
                           onSelected: (_) {
                             setState(() {
                               selectedMood = mood;
@@ -196,8 +216,7 @@ class _MoreAboutMeScreenState extends State<MoreAboutMeScreen> {
                           ),
                           elevation: 4,
                         ),
-                        child:
-                            Text('Continue', style: TextStyle(fontSize: 16)),
+                        child: Text('Continue', style: TextStyle(fontSize: 16)),
                       ),
                     ),
                   ],

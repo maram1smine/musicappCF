@@ -12,6 +12,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -22,12 +23,9 @@ class MyApp extends StatelessWidget {
         '/join_now': (context) => JoinNowScreen(),
         '/login': (context) => LoginScreen(),
         '/create_profile': (context) => CreateAccountScreen(),
-         '/more_about_me': (context) => MoreAboutMeScreen(),
-         '/profileStep2': (context) => ProfileStep2(),
-         '/profileStep3': (context) => ProfileStep3(),
-
-
-
+        '/more_about_me': (context) => MoreAboutMeScreen(),
+        '/profileStep2': (context) => ProfileStep2(),
+        '/profileStep3': (context) => ProfileStep3(),
       },
     );
   }

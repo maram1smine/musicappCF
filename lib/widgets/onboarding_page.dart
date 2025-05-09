@@ -5,8 +5,11 @@ class OnboardingPage extends StatelessWidget {
   final String title;
   final String description;
 
-  OnboardingPage(
-      {required this.image, required this.title, required this.description});
+  const OnboardingPage(
+      {super.key,
+      required this.image,
+      required this.title,
+      required this.description});
 
   @override
   Widget build(BuildContext context) {

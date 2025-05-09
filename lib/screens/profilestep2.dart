@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+
 class ProfileStep2 extends StatelessWidget {
+  const ProfileStep2({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -12,7 +15,8 @@ class ProfileStep2 extends StatelessWidget {
             Expanded(
               child: GridView.builder(
                 itemCount: 4,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2),
                 itemBuilder: (_, index) => Card(child: Icon(Icons.image)),
               ),
             ),

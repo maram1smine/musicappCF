@@ -5,7 +5,8 @@ class UserProfileScreen extends StatelessWidget {
   final String name;
   final String avatar;
 
-  UserProfileScreen({required this.name, required this.avatar});
+  const UserProfileScreen(
+      {super.key, required this.name, required this.avatar});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +17,8 @@ class UserProfileScreen extends StatelessWidget {
           SizedBox(height: 20),
           CircleAvatar(radius: 50, backgroundImage: AssetImage(avatar)),
           SizedBox(height: 10),
-          Text(name, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+          Text(name,
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
           Divider(height: 40),
           ListTile(
             leading: Icon(Icons.favorite),

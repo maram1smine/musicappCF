@@ -7,10 +7,13 @@ class ProfileStep3 extends StatelessWidget {
     "If I could duet with any artist..."
   ];
 
+  ProfileStep3({super.key});
+
   @override
   Widget build(BuildContext context) {
     // Create prompt cards
-    List<Widget> children = prompts.map((prompt) => PromptCard(prompt)).toList();
+    List<Widget> children =
+        prompts.map((prompt) => PromptCard(prompt)).toList();
 
     // Add Spacer and Finish button
     children.add(Spacer());
@@ -43,7 +46,7 @@ class PromptCard extends StatelessWidget {
   final String prompt;
   final TextEditingController controller = TextEditingController();
 
-  PromptCard(this.prompt);
+  PromptCard(this.prompt, {super.key});
 
   @override
   Widget build(BuildContext context) {

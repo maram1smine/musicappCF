@@ -3,15 +3,18 @@ import 'profilestep1.dart'; // Import the multi-step CreateProfileScreen
 import 'login.dart'; // For navigation to LoginScreen
 
 class CreateAccountScreen extends StatefulWidget {
+  const CreateAccountScreen({super.key});
+
   @override
-  _CreateAccountScreenState createState() => _CreateAccountScreenState();
+  State<CreateAccountScreen> createState() => _CreateAccountScreenState();
 }
 
 class _CreateAccountScreenState extends State<CreateAccountScreen> {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPasswordController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -48,7 +51,8 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                         borderSide: BorderSide(color: Colors.white70),
                       ),
                       focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Color.fromARGB(255, 117, 17, 170)),
+                        borderSide: BorderSide(
+                            color: Color.fromARGB(255, 117, 17, 170)),
                       ),
                     ),
                     validator: (value) {
@@ -70,14 +74,16 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                         borderSide: BorderSide(color: Colors.white70),
                       ),
                       focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Color.fromARGB(255, 117, 17, 170)),
+                        borderSide: BorderSide(
+                            color: Color.fromARGB(255, 117, 17, 170)),
                       ),
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Please enter your email';
                       }
-                      if (!RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                      if (!RegExp(
+                              r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                           .hasMatch(value)) {
                         return 'Please enter a valid email';
                       }
@@ -97,7 +103,8 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                         borderSide: BorderSide(color: Colors.white70),
                       ),
                       focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Color.fromARGB(255, 117, 17, 170)),
+                        borderSide: BorderSide(
+                            color: Color.fromARGB(255, 117, 17, 170)),
                       ),
                     ),
                     validator: (value) {
@@ -123,7 +130,8 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                         borderSide: BorderSide(color: Colors.white70),
                       ),
                       focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Color.fromARGB(255, 117, 17, 170)),
+                        borderSide: BorderSide(
+                            color: Color.fromARGB(255, 117, 17, 170)),
                       ),
                     ),
                     validator: (value) {
@@ -145,13 +153,16 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                           // Navigate to the multi-step CreateProfileScreen
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => MoreAboutMeScreen()),
+                            MaterialPageRoute(
+                                builder: (context) => MoreAboutMeScreen()),
                           );
                         }
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color.fromARGB(255, 117, 17, 170), // Purple accent
-                        padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+                        backgroundColor: const Color.fromARGB(
+                            255, 117, 17, 170), // Purple accent
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 40, vertical: 15),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30),
                         ),
@@ -169,7 +180,8 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                       onTap: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => LoginScreen()),
+                          MaterialPageRoute(
+                              builder: (context) => LoginScreen()),
                         );
                       },
                       child: const Text(

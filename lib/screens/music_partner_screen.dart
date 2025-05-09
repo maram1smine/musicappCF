@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'join_now_screen.dart'; // Import the Join Now screen
 import 'login.dart';
 
-
 class MusicPartnerScreen extends StatelessWidget {
+  const MusicPartnerScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

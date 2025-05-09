@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ModifyProfileScreen extends StatelessWidget {
+  const ModifyProfileScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -1,2 +1,0 @@
-C:/Users/ASUS/Desktop/MUSIAPPCF/musicappCF/android/app/.cxx/Debug/4y562z5y/x86/CMakeFiles/edit_cache.dir
-C:/Users/ASUS/Desktop/MUSIAPPCF/musicappCF/android/app/.cxx/Debug/4y562z5y/x86/CMakeFiles/rebuild_cache.dir

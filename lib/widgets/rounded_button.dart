@@ -7,6 +7,7 @@ class RoundedButton extends StatelessWidget {
   final Function onPressed;
 
   const RoundedButton({
+    super.key,
     required this.name,
     required this.height,
     required this.width,

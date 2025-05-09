@@ -5,7 +5,8 @@ class CustomTextFormFields extends StatelessWidget {
   final String regEx;
   final String hintText;
   final bool obscureText;
-  CustomTextFormFields({
+  const CustomTextFormFields({
+    super.key,
     required this.onSaved,
     required this.regEx,
     required this.hintText,
@@ -14,12 +15,12 @@ class CustomTextFormFields extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-        onSaved: (_value) => onSaved(_value!),
+        onSaved: (value) => onSaved(value!),
         cursorColor: Colors.black,
         style: TextStyle(color: const Color.fromARGB(255, 176, 189, 200)),
         obscureText: obscureText,
-        validator: (_value) {
-          return RegExp(regEx).hasMatch(_value!) ? null : 'Enter a valid value';
+        validator: (value) {
+          return RegExp(regEx).hasMatch(value!) ? null : 'Enter a valid value';
         },
         decoration: InputDecoration(
             fillColor: Color.fromRGBO(30, 29, 37, 1.01),

@@ -4,6 +4,8 @@ import 'modifyscreen.dart';
 import 'login.dart'; // Added import for LoginScreen
 
 class ProfileScreen extends StatelessWidget {
+  const ProfileScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     final userData = {
@@ -28,7 +30,8 @@ class ProfileScreen extends StatelessWidget {
         centerTitle: true,
         actions: [
           IconButton(
-            icon: const Icon(Icons.settings, color: Colors.white), // Icône blanche
+            icon: const Icon(Icons.settings,
+                color: Colors.white), // Icône blanche
             onPressed: () {
               Navigator.push(
                 context,
@@ -106,7 +109,8 @@ class ProfileScreen extends StatelessWidget {
                 showDialog(
                   context: context,
                   builder: (_) => AlertDialog(
-                    backgroundColor: const Color(0xFF3A1A5A), // Fond de dialogue assorti
+                    backgroundColor:
+                        const Color(0xFF3A1A5A), // Fond de dialogue assorti
                     title: const Text(
                       "Log out",
                       style: TextStyle(color: Colors.white),
@@ -128,7 +132,8 @@ class ProfileScreen extends StatelessWidget {
                           Navigator.pop(context); // Close the dialog
                           Navigator.pushAndRemoveUntil(
                             context,
-                            MaterialPageRoute(builder: (context) => LoginScreen()),
+                            MaterialPageRoute(
+                                builder: (context) => LoginScreen()),
                             (route) => false, // Remove all previous routes
                           );
                         },
@@ -144,9 +149,11 @@ class ProfileScreen extends StatelessWidget {
                 );
               },
               icon: const Icon(Icons.logout, color: Colors.white),
-              label: const Text('Log Out', style: TextStyle(color: Colors.white)),
+              label:
+                  const Text('Log Out', style: TextStyle(color: Colors.white)),
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color.fromARGB(255, 117, 17, 170), // Violet vif
+                backgroundColor:
+                    const Color.fromARGB(255, 117, 17, 170), // Violet vif
                 minimumSize: const Size(double.infinity, 50),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12), // Bordure arrondie
@@ -160,5 +167,3 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 }
-
-

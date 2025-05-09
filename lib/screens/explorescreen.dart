@@ -4,8 +4,10 @@ import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:musicapp1/widgets/buttom_nav_bar.dart';
 
 class ProfileSuggestionsScreen extends StatefulWidget {
+  const ProfileSuggestionsScreen({super.key});
+
   @override
-  _ProfileSuggestionsScreenState createState() =>
+  State<ProfileSuggestionsScreen> createState() =>
       _ProfileSuggestionsScreenState();
 }
 
@@ -17,7 +19,6 @@ class _ProfileSuggestionsScreenState extends State<ProfileSuggestionsScreen> {
       'location': 'New York',
       'distance': '10 KMS AWAY',
       'avatar': 'images/profil2.png',
-
     },
     {
       'name': 'Noah Vibes',
@@ -25,7 +26,6 @@ class _ProfileSuggestionsScreenState extends State<ProfileSuggestionsScreen> {
       'location': 'Los Angeles',
       'distance': '15 KMS AWAY',
       'avatar': 'images/profil1.png',
-
     },
   ];
 
@@ -117,10 +117,12 @@ class _ProfileSuggestionsScreenState extends State<ProfileSuggestionsScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xFF1A002D), // Violet foncé
-        title: Text('Find your partner',style: TextStyle(color: Colors.white),),
+        title: Text(
+          'Find your partner',
+          style: TextStyle(color: Colors.white),
+        ),
         leading: BackButton(color: Colors.white),
       ),
-
       body: Stack(
         children: [
           Container(
@@ -168,7 +170,8 @@ class _ProfileSuggestionsScreenState extends State<ProfileSuggestionsScreen> {
                         boxShadow: isDisliked
                             ? [
                                 BoxShadow(
-                                  color: Colors.redAccent.withOpacity(0.6),
+                                  color:
+                                      Colors.redAccent.withValues(alpha: 0.6),
                                   blurRadius: 20,
                                   spreadRadius: 2,
                                 )
@@ -192,7 +195,8 @@ class _ProfileSuggestionsScreenState extends State<ProfileSuggestionsScreen> {
                         boxShadow: isLiked
                             ? [
                                 BoxShadow(
-                                  color: Colors.greenAccent.withOpacity(0.6),
+                                  color:
+                                      Colors.greenAccent.withValues(alpha: 0.6),
                                   blurRadius: 20,
                                   spreadRadius: 2,
                                 )

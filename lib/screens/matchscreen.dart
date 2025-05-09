@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'userprofilescreen.dart';
 import 'package:musicapp1/widgets/buttom_nav_bar.dart';
+
 // Matches screen
 class MatchesScreen extends StatelessWidget {
   final List<Map<String, String>> matches = [
@@ -9,11 +10,15 @@ class MatchesScreen extends StatelessWidget {
     // Add more...
   ];
 
+  MatchesScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFF1D0036),
-      appBar: AppBar(backgroundColor: Colors.transparent,title: Text('Your Matches',style: TextStyle(color: Colors.white))),
+      appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          title: Text('Your Matches', style: TextStyle(color: Colors.white))),
       body: GridView.builder(
         padding: EdgeInsets.all(16),
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -42,7 +47,9 @@ class MatchesScreen extends StatelessWidget {
                   backgroundImage: AssetImage(match['avatar']!),
                 ),
                 SizedBox(height: 8),
-                Text(match['name']!, style: TextStyle(fontWeight: FontWeight.w600,color: Colors.white)),
+                Text(match['name']!,
+                    style: TextStyle(
+                        fontWeight: FontWeight.w600, color: Colors.white)),
               ],
             ),
           );

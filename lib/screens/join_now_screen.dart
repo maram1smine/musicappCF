@@ -3,8 +3,10 @@ import '../widgets/onboarding_page.dart'; // Import reusable widget
 import 'create_account_screen.dart';
 
 class JoinNowScreen extends StatefulWidget {
+  const JoinNowScreen({super.key});
+
   @override
-  _JoinNowScreenState createState() => _JoinNowScreenState();
+  State<JoinNowScreen> createState() => _JoinNowScreenState();
 }
 
 class _JoinNowScreenState extends State<JoinNowScreen> {
